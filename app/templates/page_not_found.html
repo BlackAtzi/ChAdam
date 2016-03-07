@@ -1,0 +1,19 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Error 404</h1>
+  <p>
+    <div>I'm afraid the page you're looking for doesn't exist.</div>
+    {% if current_user.is_authenticated() %}
+        <div>
+            Feel free to return to <a href="/index">the home page</a>.
+        </div>
+    {% else %}
+        <div>
+            Feel free to return to <a href="/">the login screen</a>.
+        </div>
+    {% endif %}
+  </p>
+  </form>
+{% endblock %}

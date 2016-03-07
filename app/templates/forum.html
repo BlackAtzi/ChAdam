@@ -1,0 +1,40 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated() %}
+    <h1>{{ forum.name }}</h1>
+    <hr>
+    {% for post in posts %}
+        <div>
+            <font size="4"><b>{{ users[post.user_id-1].nickname }}</b> | {{ post.timestamp }}</font>
+        </div>
+        {% if post.is_img %}
+        <br>
+        <div><font size="3">{{ post.body|safe }}</font></div>
+        <br>
+        {% else %}
+<div style="white-space: pre-wrap;"><font size="3">{{ post.body }}</font></div>
+        {% endif %}
+        <hr>
+    {% endfor %}
+    <div><font size="4">Post a response:</font></div>
+    <form action="" method=post>
+        {{postform.hidden_tag()}}
+        <dl>
+        {{ postform.post(cols="35", rows="8") }}
+        </dl>
+        <input type=submit value="Post text">
+    </form>
+    <br>
+    <form action="" method=post>
+        {{imgform.hidden_tag()}}
+        <dl>
+            {{ imgform.postImg(cols="35", rows="1") }}
+        </dl>
+        <input type=submit value="Post image">
+    </form>
+
+
+{% endif %}
+{% endblock %}

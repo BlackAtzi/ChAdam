@@ -1,0 +1,27 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated() %}
+    <h1>Hi {{ current_user.nickname }}, welcome to Chadam!</h1>
+    <h2>
+        Choose a forum from the list below:
+    </h2>
+    {% for forum in forums %}
+    <p>
+        <a href="{{ url_for('show_forum', forum_id=forum.id)}}"><font size="5">{{ forum.name }}</font></a>
+    </p>
+    {% endfor %}
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          <h2>Create new forum:</h2>
+          Forum name: {{ form.forum_name(size=30) }}<br>
+          {% for error in form.forum_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+      </p>
+      <p><input type="submit" value="Create"></p>
+  </form>
+{% endif %}
+{% endblock %}
