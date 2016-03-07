@@ -36,7 +36,7 @@ class Forum(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    body = db.Column(db.String(140))
+    body = db.Column(db.String(500))
     timestamp = db.Column(db.String)
     is_img = db.Column(db.Boolean)
     user_id = db.Column(db.Integer)
